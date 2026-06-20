@@ -53,8 +53,9 @@
 
   /* ---- BIG category nav ---- */
   .indexbar{position:sticky;top:45px;z-index:40;background:var(--paper);border-bottom:1px solid var(--ink)}
-  .indexbar .wrap{display:flex;gap:0;overflow-x:auto;scrollbar-width:none}
+  .indexbar .wrap{display:flex;gap:0;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;overscroll-behavior-x:contain}
   .indexbar .wrap::-webkit-scrollbar{display:none}
+  .cat-btn{scroll-snap-align:start}
   .cat-btn{font-family:'Newsreader',serif;font-weight:420;font-size:clamp(17px,2vw,21px);letter-spacing:-.01em;color:var(--muted);background:none;border:0;cursor:pointer;padding:20px 30px 20px 0;position:relative;white-space:nowrap;display:flex;align-items:center;gap:12px;transition:color .18s}
   .cat-btn .dot{width:11px;height:11px;border-radius:50%;background:currentColor;opacity:.85;flex:none}
   .cat-btn[data-filter="all"] .dot{display:none}
@@ -112,28 +113,37 @@
   @media (max-width:1024px){ .wrap,.topbar .wrap{padding-left:32px;padding-right:32px} }
   @media (max-width:768px){
     .wrap,.topbar .wrap{padding-left:24px;padding-right:24px}
-    .masthead{padding:48px 0 18px}
-    .mh-grid{grid-template-columns:1fr;gap:20px}
+    .masthead{padding:44px 0 16px}
+    .masthead h1{font-size:clamp(52px,15vw,96px)}
+    .mh-grid{grid-template-columns:1fr;gap:18px}
+    .mh-lead{max-width:none}
     .mh-meta{text-align:left}
-    .cat-btn{font-size:18px;padding:17px 24px 17px 0}
-    .entry{grid-template-columns:32px 1fr;gap:4px 18px}
+    .indexbar .wrap{padding-right:30px}
+    .indexbar::after{content:"";position:absolute;top:0;right:0;bottom:0;width:34px;background:linear-gradient(to right,rgba(255,241,229,0),var(--paper));pointer-events:none}
+    .cat-btn{font-size:18px;padding:16px 22px 16px 0}
+    .sec-name{font-size:clamp(30px,8vw,46px)}
+    .entry{grid-template-columns:30px 1fr;gap:4px 16px;padding:24px 0}
+    .entry h2{max-width:none}
+    .entry .dek{max-width:none}
     .entry-cta{grid-column:2;align-self:start;margin-top:12px}
-    .sec-more{padding-left:50px}
+    .sec-more{padding-left:46px}
   }
   @media (max-width:600px){
     .wrap,.topbar .wrap{padding-left:18px;padding-right:18px}
-    .tb-name{font-size:10px}
+    .topbar .wrap{padding-top:11px;padding-bottom:11px}
+    .tb-name{font-size:10px;letter-spacing:.1em}
     .lang-hint{display:none}
-    .indexbar{top:43px}
-    .cat-btn{font-size:17px;gap:9px}
-    .metarow{align-items:flex-start}
+    .cat-btn{font-size:17px;gap:9px;padding:15px 20px 15px 0}
+    .metarow{flex-direction:column;align-items:flex-start;gap:6px}
     .feed-foot{flex-direction:column;align-items:flex-start}
     .feed-foot .links{text-align:left}
   }
   @media (max-width:380px){
-    .wrap,.topbar .wrap{padding-left:15px;padding-right:15px}
-    .cat-btn{padding-right:18px}
-    .entry{grid-template-columns:1fr}.entry-no{display:none}.entry-main{grid-column:1}.entry-cta{grid-column:1}
+    .wrap,.topbar .wrap{padding-left:14px;padding-right:14px}
+    .masthead h1{font-size:clamp(44px,15vw,60px)}
+    .cat-btn{padding-right:16px;font-size:16px}
+    .entry{grid-template-columns:1fr;padding:22px 0}
+    .entry-no{display:none}.entry-main{grid-column:1}.entry-cta{grid-column:1}
     .sec-more{padding-left:0}
   }
   @media (prefers-reduced-motion:reduce){
@@ -213,7 +223,7 @@
     trading:    {label:{en:'Trading',    es:'Trading'},    sym:'TRD',  color:'#B5740F', more:{en:'200+ more trading & markets pieces', es:'200+ piezas más de trading y mercados'}},
     gaming:     {label:{en:'Gaming',     es:'Gaming'},     sym:'GMG',  color:'#C0362C', more:{en:'1,000+ more casino & iGaming articles', es:'1,000+ artículos más de casino e iGaming'}},
     finance:    {label:{en:'Finance',    es:'Finanzas'},   sym:'FIN',  color:'#1C6B4A', more:{en:'200+ more finance & investing pieces', es:'200+ piezas más de finanzas e inversión'}},
-    periodismo: {label:{en:'Journalism', es:'Periodismo'}, sym:'PRS',  color:'#6D3A8E', more:{en:'and bylines in more outlets', es:'y colaboraciones en más medios'}},
+    periodismo: {label:{en:'Journalism', es:'Periodismo'}, sym:'PRS',  color:'#6D3A8E', more:{en:'more data features & bylines (NewsBTC, 99Bitcoins, Esports Insider)', es:'más reportajes de datos y colaboraciones (NewsBTC, 99Bitcoins, Esports Insider)'}},
     copywriting:{label:{en:'Copywriting',es:'Copywriting'},sym:'COPY', color:'#1F6F7A', more:{en:'100+ more game descriptions & reviews', es:'100+ descripciones y reseñas de juegos más'}}
   };
 
@@ -313,15 +323,21 @@
     {cat:'finance',lang:'EN',outlet:'Sophisticated Investor',title:'Augusta Precious Metals Review: A Professional Assessment for Gold IRA Investors',
      blurb:'A research-backed look at costs, custody and suitability for long-term investors.',url:null},
 
-    // ===== PERIODISMO (client byline) =====
-    {cat:'periodismo',lang:'EN',outlet:'NewsBTC',title:'Crypto market news and explainers',
-     blurb:'Bitcoin and altcoin news written for non-technical readers. Accurate first, readable second.',url:null},
-    {cat:'periodismo',lang:'EN',outlet:'99Bitcoins',title:'Crypto education and how-to guides',
-     blurb:'Evergreen crypto explainers for one of the oldest names in the space.',url:null},
-    {cat:'periodismo',lang:'EN',outlet:'Esports Insider',title:'Features on the business of esports',
-     blurb:'Industry features on the money, deals and structure behind competitive gaming.',url:null},
-    {cat:'periodismo',lang:'ES',outlet:'Feature',title:'Bitcoin en América Latina: transformación financiera y nuevas oportunidades',
-     blurb:'Crónica sobre la adopción cripto en la región y su giro cultural y económico.',url:null},
+    // ===== PERIODISMO / JOURNALISM (data-driven features, client byline) =====
+    {cat:'periodismo',lang:'EN',outlet:'Data feature',title:'Detroit\u2019s Crime Statistics Compared to National Averages',
+     blurb:'A newspaper-style data feature: Detroit at 66.3 crimes per 1,000 residents vs a 22.0 national median, sourced from NeighborhoodScout, with the context behind the numbers.',url:null},
+    {cat:'periodismo',lang:'EN',outlet:'Esports · data report',title:'LSports Report: Esports Growth in Betting (2025)',
+     blurb:'A data report on esports betting: a 75% year-over-year surge that made it the third most-consumed betting category, built on LSports figures.',url:null},
+    {cat:'periodismo',lang:'EN',outlet:'Investigative feature',title:'Rigged! The Casino Games Most Susceptible to Foul Play',
+     blurb:'An investigation into game integrity, drawing on security experts to map where casino games are actually vulnerable.',url:null},
+    {cat:'periodismo',lang:'EN',outlet:'Culture feature',title:'Why Gamers Love Plinko: The Most Addictive Casino Game Explained',
+     blurb:'A culture feature tracing Plinko from a game-show gimmick to a crypto-casino obsession, and what that says about attention.',url:null},
+    {cat:'periodismo',lang:'EN',outlet:'Sports · data',title:'NHL Playoff Odds 2024: Stanley Cup Betting Tips',
+     blurb:'A data-driven NHL playoff preview comparing odds across sportsbooks to read the real contenders.',url:null},
+    {cat:'periodismo',lang:'ES',outlet:'Reportaje',title:'Bitcoin en América Latina: transformación financiera y nuevas oportunidades',
+     blurb:'Crónica sobre la adopción cripto en la región, con datos de mercado y su giro cultural y económico.',url:null},
+    {cat:'periodismo',lang:'ES',outlet:'Bolsamanía',title:'Las criptomonedas más negociadas en España',
+     blurb:'Reportaje de datos para un medio financiero español: volúmenes y tendencias de criptoactivos en el país.',url:null},
     {cat:'periodismo',lang:'ES',outlet:'Computing.es',title:'Reportajes de tecnología e inteligencia artificial',
      blurb:'Coberturas de tecnología e IA para prensa española especializada.',url:null},
     {cat:'periodismo',lang:'ES',outlet:'La República · The Objective',title:'Análisis de fintech y economía digital',
@@ -375,7 +391,18 @@
       b.classList.toggle('active',on);
       b.style.color=(on&&b.dataset.filter!=='all')?CATS[b.dataset.filter].color:'';});
   }
-  function setFilter(f){ filter=f; syncCats(); render(); }
+  function setFilter(f){ filter=f; syncCats(); render();
+    var a=catBar.querySelector('.cat-btn.active'); if(a&&a.scrollIntoView){a.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});} }
+
+  // Keep the sticky category bar locked right below the top bar on every screen size
+  var topbarEl=document.querySelector('.topbar');
+  var indexbarEl=document.querySelector('.indexbar');
+  function setStickyOffset(){ if(topbarEl&&indexbarEl){ indexbarEl.style.top=topbarEl.offsetHeight+'px'; } }
+  window.addEventListener('resize',setStickyOffset);
+  window.addEventListener('orientationchange',setStickyOffset);
+  window.addEventListener('load',setStickyOffset);
+  if(document.fonts&&document.fonts.ready){ document.fonts.ready.then(setStickyOffset); }
+  setTimeout(setStickyOffset,300);
 
   function entryHTML(clip,c,n){
     var live=!!clip.url;
@@ -421,6 +448,7 @@
   }
   Array.prototype.forEach.call(document.querySelectorAll('.langbtn'),function(b){b.addEventListener('click',function(){applyLang(b.dataset.lang);});});
   applyLang('en');
+  setStickyOffset();
 </script>
 </body>
 </html>
