@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Andrés Rendón · Writer &amp; editor</title>
+<meta name="description" content="Selected published work by Andrés Rendón across banking, trading, gaming, finance, journalism and copywriting. English and Spanish. Ex-KPMG.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..700;1,6..72,300..600&family=Space+Mono:ital,wght@0,400;0,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FFF1E5;--paper-2:#FBE7D6;--paper-3:#F4D9C2;--ink:#1F1A16;--ink-soft:#544b41;
+    --muted:#9a8f7e;--rule:#E7D4C2;--rule-2:#D8C0AA;--live:#2F7D5B;--maxw:1180px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--paper);color:var(--ink);font-family:'Newsreader',Georgia,serif;font-optical-sizing:auto;-webkit-font-smoothing:antialiased;line-height:1.58;text-rendering:optimizeLegibility}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--ink);color:var(--paper)}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 44px}
+  .mono{font-family:'Space Mono',monospace}
+
+  /* ---- top bar ---- */
+  .topbar{border-bottom:1px solid var(--ink);background:var(--paper);position:sticky;top:0;z-index:50}
+  .topbar .wrap{display:flex;justify-content:space-between;align-items:center;padding:12px 44px}
+  .tb-name{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700}
+  .tb-right{display:flex;align-items:center;gap:14px}
+  .lang-hint{font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .langtoggle{display:inline-flex;border:1px solid var(--ink);border-radius:2px;overflow:hidden}
+  .langbtn{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.05em;padding:6px 15px;background:none;border:0;cursor:pointer;color:var(--ink);transition:.15s}
+  .langbtn.active{background:var(--ink);color:var(--paper)}
+
+  /* ---- masthead ---- */
+  .masthead{padding:72px 0 22px}
+  .mh-kicker{font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin-bottom:30px;display:flex;align-items:center;gap:16px}
+  .mh-kicker::after{content:"";flex:1;height:1px;background:var(--rule)}
+  .masthead h1{font-weight:200;font-size:clamp(60px,13vw,168px);line-height:.82;letter-spacing:-.045em}
+  .masthead h1 em{font-style:italic;font-weight:300}
+  .mh-grid{display:grid;grid-template-columns:1.45fr 1fr;gap:34px;align-items:end;margin-top:38px}
+  .mh-lead{font-size:clamp(17px,2.2vw,23px);color:var(--ink-soft);line-height:1.46;max-width:40ch;font-weight:350}
+  .mh-lead b{font-weight:600;color:var(--ink)}
+  .mh-meta{font-family:'Space Mono',monospace;font-size:11px;line-height:2.1;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;text-align:right}
+  .mh-meta span{color:var(--ink)}
+
+  /* ---- ticker ---- */
+  .ticker{border-top:2px solid var(--ink);border-bottom:1px solid var(--ink);overflow:hidden;background:var(--paper);margin-top:40px}
+  .ticker-track{display:inline-block;white-space:nowrap;font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;padding:12px 0;will-change:transform;animation:scroll 54s linear infinite}
+  .ticker:hover .ticker-track{animation-play-state:paused}
+  .ticker-track b{font-weight:700}
+  .ticker-track i{color:var(--rule-2);font-style:normal;padding:0 18px}
+  @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* ---- BIG category nav ---- */
+  .indexbar{position:sticky;top:45px;z-index:40;background:var(--paper);border-bottom:1px solid var(--ink)}
+  .indexbar .wrap{display:flex;gap:0;overflow-x:auto;scrollbar-width:none}
+  .indexbar .wrap::-webkit-scrollbar{display:none}
+  .cat-btn{font-family:'Newsreader',serif;font-weight:420;font-size:clamp(17px,2vw,21px);letter-spacing:-.01em;color:var(--muted);background:none;border:0;cursor:pointer;padding:20px 30px 20px 0;position:relative;white-space:nowrap;display:flex;align-items:center;gap:12px;transition:color .18s}
+  .cat-btn .dot{width:11px;height:11px;border-radius:50%;background:currentColor;opacity:.85;flex:none}
+  .cat-btn[data-filter="all"] .dot{display:none}
+  .cat-btn .csym{font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.06em;color:var(--muted);opacity:0;transition:opacity .18s;margin-left:2px}
+  .cat-btn:hover{color:var(--ink)}
+  .cat-btn.active{color:var(--ink)}
+  .cat-btn.active .csym{opacity:.7}
+  .cat-btn.active::after{content:"";position:absolute;left:0;right:30px;bottom:-1px;height:4px;background:currentColor}
+
+  /* ---- meta row ---- */
+  .metarow{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding:26px 0 2px}
+  .feednote{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.05em;color:var(--muted);text-transform:uppercase}
+  .legend{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.04em;color:var(--muted);text-transform:uppercase;display:flex;gap:18px;align-items:center}
+  .legend .lv{color:var(--live)}
+
+  /* ---- feed ---- */
+  .feed{padding:0 0 30px}
+  .sec{padding-top:26px}
+  .sec-head{display:flex;align-items:center;gap:16px;padding:18px 0 10px;border-bottom:2px solid var(--c);margin-bottom:2px}
+  .sec-sym{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.1em;color:#fff;background:var(--c);padding:5px 10px;border-radius:3px}
+  .sec-name{font-weight:300;font-size:clamp(32px,5.2vw,58px);letter-spacing:-.03em;line-height:.95}
+  .sec-name em{font-style:italic;font-weight:400}
+  .sec-count{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-left:auto}
+
+  .entry{display:grid;grid-template-columns:54px 1fr auto;gap:6px 30px;align-items:start;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--rule);border-left:3px solid transparent;padding:30px 20px 30px 0;cursor:pointer;transition:background .22s,border-color .22s,padding-left .22s}
+  .entry.live:hover{background:var(--paper-2);border-left-color:var(--c);padding-left:18px}
+  .entry.byline{cursor:default}
+  .entry.byline:hover{background:transparent}
+  .entry-no{grid-column:1;font-family:'Space Mono',monospace;font-size:13px;color:var(--muted);padding-top:8px;letter-spacing:.02em}
+  .entry-main{grid-column:2;min-width:0}
+  .entry-kick{font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+  .entry-out{color:var(--c);font-weight:700}
+  .entry-lang{color:var(--muted);border:1px solid var(--rule-2);padding:2px 7px;border-radius:2px;font-size:9.5px}
+  .entry-status{color:var(--muted)}
+  .entry-status.live{color:var(--live);font-weight:700}
+  .entry h2{font-weight:400;font-size:clamp(22px,3vw,31px);line-height:1.12;letter-spacing:-.018em;transition:color .15s;max-width:32ch}
+  .entry.live:hover h2{color:var(--c)}
+  .entry .dek{font-size:clamp(14.5px,1.9vw,17px);color:var(--ink-soft);margin-top:10px;max-width:66ch;line-height:1.5;font-weight:350}
+  .entry-cta{grid-column:3;align-self:center;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);white-space:nowrap;display:flex;align-items:center;gap:6px;transition:.15s}
+  .entry-cta .arw{font-size:15px;transition:transform .2s}
+  .entry.live:hover .entry-cta{color:var(--c)}
+  .entry.live:hover .entry-cta .arw{transform:translate(2px,-2px)}
+  .entry:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+
+  .sec-more{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.03em;color:var(--c);padding:22px 0 10px 84px;display:flex;align-items:center;gap:10px;font-weight:700}
+  .sec-more .pl{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border:1.5px solid var(--c);border-radius:50%;font-size:14px}
+
+  .feed-foot{padding:50px 0 96px;border-top:2px solid var(--ink);margin-top:22px;display:flex;flex-wrap:wrap;gap:26px 40px;justify-content:space-between;align-items:flex-end}
+  .feed-foot .blurb{font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);line-height:1.85;max-width:56ch;letter-spacing:.02em}
+  .feed-foot .links{font-family:'Space Mono',monospace;font-size:13px;display:flex;flex-direction:column;gap:10px;text-align:right}
+  .feed-foot .links a{border-bottom:1px solid var(--rule-2);padding-bottom:2px;transition:border-color .15s}
+  .feed-foot .links a:hover{border-color:var(--ink)}
+  :focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+
+  @media (max-width:1024px){ .wrap,.topbar .wrap{padding-left:32px;padding-right:32px} }
+  @media (max-width:768px){
+    .wrap,.topbar .wrap{padding-left:24px;padding-right:24px}
+    .masthead{padding:48px 0 18px}
+    .mh-grid{grid-template-columns:1fr;gap:20px}
+    .mh-meta{text-align:left}
+    .cat-btn{font-size:18px;padding:17px 24px 17px 0}
+    .entry{grid-template-columns:32px 1fr;gap:4px 18px}
+    .entry-cta{grid-column:2;align-self:start;margin-top:12px}
+    .sec-more{padding-left:50px}
+  }
+  @media (max-width:600px){
+    .wrap,.topbar .wrap{padding-left:18px;padding-right:18px}
+    .tb-name{font-size:10px}
+    .lang-hint{display:none}
+    .indexbar{top:43px}
+    .cat-btn{font-size:17px;gap:9px}
+    .metarow{align-items:flex-start}
+    .feed-foot{flex-direction:column;align-items:flex-start}
+    .feed-foot .links{text-align:left}
+  }
+  @media (max-width:380px){
+    .wrap,.topbar .wrap{padding-left:15px;padding-right:15px}
+    .cat-btn{padding-right:18px}
+    .entry{grid-template-columns:1fr}.entry-no{display:none}.entry-main{grid-column:1}.entry-cta{grid-column:1}
+    .sec-more{padding-left:0}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}.ticker-track{animation:none}
+    .entry,.entry:hover{transition:none}*{transition:none!important}
+  }
+</style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="wrap">
+      <span class="tb-name">Andrés Rendón</span>
+      <div class="tb-right">
+        <span class="lang-hint" id="langHint">Show work in</span>
+        <div class="langtoggle" role="group" aria-label="Show work in">
+          <button class="langbtn active" data-lang="en">EN</button>
+          <button class="langbtn" data-lang="es">ES</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header class="masthead">
+    <div class="wrap">
+      <div class="mh-kicker" id="kicker">Selected work · Writer &amp; editor</div>
+      <h1>Andrés <em>Rendón</em></h1>
+      <div class="mh-grid">
+        <p class="mh-lead" id="lead"></p>
+        <div class="mh-meta" id="meta"></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="ticker"><div class="ticker-track" id="ticker"></div></div>
+
+  <nav class="indexbar" aria-label="Filter by section">
+    <div class="wrap" id="catBar"></div>
+  </nav>
+
+  <main class="wrap">
+    <div class="metarow">
+      <p class="feednote" id="feednote"></p>
+      <p class="legend" id="legend"></p>
+    </div>
+    <div class="feed" id="feed"></div>
+    <div class="feed-foot">
+      <p class="blurb" id="footBlurb"></p>
+      <div class="links">
+        <a href="mailto:arendon9128@gmail.com">arendon9128@gmail.com →</a>
+        <a href="https://www.linkedin.com/in/andresrendonromero/" target="_blank" rel="noopener">LinkedIn →</a>
+      </div>
+    </div>
+  </main>
+
+<script>
+  var LANG='en';
+  var T = {
+    en:{kicker:'Selected work · Writer & editor', hint:'Show work in',
+        lead:'A finance professional who writes. <b>1,800+ published articles</b> across banking, trading, gaming, finance, journalism and copywriting, in English and Spanish. Switch the language to see the work I publish for English or Spanish clients.',
+        meta:['Writer & editor · ex-KPMG','Bachelor in Finance & Banking','SEO articles and writing that does not need it','Bilingual EN · ES · México'],
+        all:'All', client:'Client byline', live:'Live', read:'Read', pieces:'pieces', piece:'piece', across:'across', sections:'sections', inn:'in',
+        legendLive:'Live link', legendByline:'Client byline (ghostwritten)',
+        foot:'Most work is published under the client\u2019s byline; live links point to the published pieces (Oportun, MDC Trading Academy, The Investor U). This is a selection: the full archive and drafts are available privately on request.',
+        ticker:['1,800+ articles','EN · ES','Ex-KPMG','1K \u2192 45K · MDC','100 \u2192 11K · The Investor U','Oportun','Citi','Bovada','Ignition','The Investor U','NewsBTC','99Bitcoins','Esports Insider']},
+    es:{kicker:'Trabajo seleccionado · Escritor y editor', hint:'Ver trabajo en',
+        lead:'Un profesional de finanzas que escribe. <b>Más de 1,800 artículos publicados</b> en banca, trading, gaming, finanzas, periodismo y copywriting, en inglés y español. Cambia el idioma para ver el trabajo que publico para clientes en inglés o en español.',
+        meta:['Escritor y editor · ex-KPMG','Licenciado en Finanzas y Banca','Artículos SEO y escritura que no lo necesita','Bilingüe EN · ES · México'],
+        all:'Todo', client:'Bajo firma del cliente', live:'En vivo', read:'Leer', pieces:'piezas', piece:'pieza', across:'en', sections:'secciones', inn:'en',
+        legendLive:'Enlace en vivo', legendByline:'Bajo firma del cliente (ghostwriting)',
+        foot:'Casi todo se publica bajo la firma del cliente; los enlaces en vivo llevan a las piezas publicadas (Oportun, MDC Trading Academy, The Investor U). Esto es una selección: el archivo completo y los borradores están disponibles en privado.',
+        ticker:['1,800+ artículos','EN · ES','Ex-KPMG','1K \u2192 45K · MDC','100 \u2192 11K · The Investor U','Oportun','Citi','Bovada','Ignition','The Investor U','NewsBTC','99Bitcoins','Esports Insider']}
+  };
+
+  var CATS = {
+    banking:    {label:{en:'Banking',    es:'Banca'},      sym:'BNK',  color:'#2A52A0', more:{en:'40+ more banking pieces for Oportun & Citi', es:'40+ artículos más de banca para Oportun y Citi'}},
+    trading:    {label:{en:'Trading',    es:'Trading'},    sym:'TRD',  color:'#B5740F', more:{en:'200+ more trading & markets pieces', es:'200+ piezas más de trading y mercados'}},
+    gaming:     {label:{en:'Gaming',     es:'Gaming'},     sym:'GMG',  color:'#C0362C', more:{en:'1,000+ more casino & iGaming articles', es:'1,000+ artículos más de casino e iGaming'}},
+    finance:    {label:{en:'Finance',    es:'Finanzas'},   sym:'FIN',  color:'#1C6B4A', more:{en:'200+ more finance & investing pieces', es:'200+ piezas más de finanzas e inversión'}},
+    periodismo: {label:{en:'Journalism', es:'Periodismo'}, sym:'PRS',  color:'#6D3A8E', more:{en:'and bylines in more outlets', es:'y colaboraciones en más medios'}},
+    copywriting:{label:{en:'Copywriting',es:'Copywriting'},sym:'COPY', color:'#1F6F7A', more:{en:'100+ more game descriptions & reviews', es:'100+ descripciones y reseñas de juegos más'}}
+  };
+
+  // lang:'EN'|'ES'|'EN/ES'; blurb plain string in clip language; url=live link or null
+  var CLIPS = [
+    // ===== BANKING (Citi + Oportun, live EN + ES) =====
+    {cat:'banking',lang:'EN',outlet:'Citi',title:'How to Save Money: 9 Tips to Get Started',
+     blurb:'Nine practical, goal-first saving tips for everyday people, written to Citi brand and compliance standards.',url:'https://www.citi.com/banking/personal-banking-guide/savings/money-savings-tips'},
+    {cat:'banking',lang:'EN',outlet:'Citi',title:'Budgeting Basics: A Budget Template for Beginners',
+     blurb:'A zero-based budgeting walkthrough that turns a paycheck into a plan, beginner-friendly.',url:'https://www.citi.com/banking/personal-banking-guide/basic-finance/budgeting-basics'},
+    {cat:'banking',lang:'EN',outlet:'Citi',title:'How to Create a Financial Plan: 5 Essential Steps',
+     blurb:'Five steps to a personal financial plan: set goals, build a budget, manage debt and adjust over time.',url:'https://www.citi.com/banking/personal-banking-guide/basic-finance/how-to-create-a-financial-plan'},
+    {cat:'banking',lang:'EN',outlet:'Citi',title:'How to Set Financial Goals',
+     blurb:'How to define and prioritize short and long-term money goals that actually stick.',url:'https://www.citi.com/banking/personal-banking-guide/basic-finance/how-to-set-financial-goals'},
+    {cat:'banking',lang:'EN',outlet:'Citi',title:'What Is the 50/30/20 Rule?',
+     blurb:'The 50/30/20 budgeting rule explained simply, for first-time budgeters.',url:'https://www.citi.com/banking/personal-banking-guide/basic-finance/50-30-20-rule'},
+    {cat:'banking',lang:'EN',outlet:'Oportun',title:'How to get a personal loan',
+     blurb:'An 8-step guide to applying, written in plain language for a lower-income, first-time-borrower audience.',url:'https://oportun.com/financial-education/how-to-apply-for-a-personal-loan/'},
+    {cat:'banking',lang:'EN',outlet:'Oportun',title:'How to refinance a personal loan',
+     blurb:'The step-by-step refinance process, with the honest math on when it saves money and when it does not.',url:'https://oportun.com/financial-education/how-to-refinance-a-personal-loan/'},
+    {cat:'banking',lang:'EN',outlet:'Oportun',title:'Benefits and drawbacks of refinancing a personal loan',
+     blurb:'A balanced look at APR, fees and term length so a borrower can decide for themselves.',url:'https://oportun.com/financial-education/benefits-and-drawbacks-of-refinancing-a-personal-loan/'},
+    {cat:'banking',lang:'EN',outlet:'Oportun',title:'How to get approved for a loan',
+     blurb:'What lenders actually look at, and concrete ways to strengthen a thin-file application.',url:'https://oportun.com/financial-education/how-to-get-approved-for-a-loan/'},
+    {cat:'banking',lang:'EN',outlet:'Oportun',title:'How to refinance your credit card debt',
+     blurb:'Balance-transfer cards vs personal loans vs home equity, with the trade-offs spelled out.',url:'https://oportun.com/financial-education/how-to-refinance-your-credit-card-debt/'},
+    {cat:'banking',lang:'ES',outlet:'Oportun',title:'Cómo aplicar para un préstamo personal',
+     blurb:'Guía de 8 pasos para solicitar, en lenguaje claro para quien pide un préstamo por primera vez.',url:'https://oportun.com/es/educacion-financiera/como-aplicar-para-un-prestamo-personal/'},
+    {cat:'banking',lang:'ES',outlet:'Oportun',title:'Cómo refinanciar un préstamo personal',
+     blurb:'El proceso de refinanciar paso a paso, con la matemática honesta de cuándo conviene y cuándo no.',url:'https://oportun.com/es/educacion-financiera/como-refinanciar-un-prestamo-personal/'},
+    {cat:'banking',lang:'ES',outlet:'Oportun',title:'Beneficios e inconvenientes de refinanciar tu préstamo personal',
+     blurb:'Una mirada equilibrada al APR, las tarifas y el plazo para que el prestatario decida.',url:'https://oportun.com/es/educacion-financiera/beneficios-y-desventajas-de-refinanciar-un-prestamo-personal/'},
+    {cat:'banking',lang:'ES',outlet:'Oportun',title:'Guía práctica para conocer los distintos tipos de préstamos',
+     blurb:'Personal, de auto, garantizado: cómo elegir el préstamo correcto para cada necesidad.',url:'https://oportun.com/es/educacion-financiera/guia-para-entender-los-diferentes-tipos-de-prestamos/'},
+    {cat:'banking',lang:'ES',outlet:'Oportun',title:'Cómo refinanciar la deuda de tu tarjeta de crédito',
+     blurb:'Transferencia de saldo, préstamo personal o garantía hipotecaria, con sus ventajas y riesgos.',url:'https://oportun.com/es/educacion-financiera/como-refinanciar-la-deuda-de-tu-tarjeta-de-credito/'},
+
+    // ===== TRADING (EN client byline, ES MDC live) =====
+    {cat:'trading',lang:'EN',outlet:'Finance media',title:'10 Best Crypto Auto Trading Platforms Reviewed',
+     blurb:'A ranked comparison of automated trading platforms: features, fees and the red flags to watch.',url:null},
+    {cat:'trading',lang:'EN',outlet:'Finance media',title:'Best Bitcoin Robot: Top 10 Crypto Trading Bots Ranked',
+     blurb:'Which trading bots actually deliver, and which to avoid, with the criteria that matter.',url:null},
+    {cat:'trading',lang:'EN',outlet:'Finance media',title:'Top 10 AI Trading Platforms Ranked',
+     blurb:'AI trading tools compared for real-world performance instead of marketing claims.',url:null},
+    {cat:'trading',lang:'EN',outlet:'Finance media',title:'10 Best AI Trading Bots Ranked',
+     blurb:'A buyer\u2019s guide to AI trading bots across stocks and crypto.',url:null},
+    {cat:'trading',lang:'EN',outlet:'Finance media',title:'10 Best Trading Robots for Stocks and Currencies',
+     blurb:'Automated trading software compared across equities and forex.',url:null},
+    {cat:'trading',lang:'ES',outlet:'MDC Trading Academy',title:'Day Trading: qué es, cómo aprenderlo y cómo hacerlo',
+     blurb:'Guía de principiante a operador. Parte del motor que llevó a MDC de 1K a 45K visitas mensuales.',url:'https://www.mdctradingacademy.com/blog/day-trading/'},
+    {cat:'trading',lang:'ES',outlet:'MDC Trading Academy',title:'¿Qué es el trading y cómo puedes ganar dinero haciéndolo?',
+     blurb:'El pilar fundacional del blog: qué es el trading y cómo empezar sin perderlo todo.',url:'https://www.mdctradingacademy.com/blog/que-es-el-trading/'},
+    {cat:'trading',lang:'ES',outlet:'MDC Trading Academy',title:'Cómo hacer trading desde cero: guía práctica para empezar',
+     blurb:'Una ruta realista de 3-5-7 meses: aprender, practicar y buscar resultados consistentes.',url:'https://www.mdctradingacademy.com/blog/como-hacer-trading/'},
+    {cat:'trading',lang:'ES',outlet:'MDC Trading Academy',title:'Qué es un bróker y cómo elegir el mejor para hacer trading',
+     blurb:'Comisiones, plataformas, regulación: qué mirar antes de abrir una cuenta.',url:'https://www.mdctradingacademy.com/blog/que-es-un-broker/'},
+    {cat:'trading',lang:'ES',outlet:'MDC Trading Academy',title:'Trading en la bolsa de valores: ¿cómo hacerlo?',
+     blurb:'Del primer bróker a la primera estrategia: cómo operar acciones, opciones y futuros.',url:'https://www.mdctradingacademy.com/blog/la-bolsa-de-valores/'},
+
+    // ===== GAMING (client byline) =====
+    {cat:'gaming',lang:'EN',outlet:'iGaming media',title:'Best Online Casino New York: Top Real Money Casinos (2025)',
+     blurb:'A state-specific casino guide built on RTP, terms and responsible-gambling framing.',url:null},
+    {cat:'gaming',lang:'EN',outlet:'iGaming media',title:'10 Best Blackjack Casino Sites: Real Money Blackjack Compared',
+     blurb:'Operator reviews for blackjack players: rules, payouts and fair-play checks.',url:null},
+    {cat:'gaming',lang:'EN',outlet:'iGaming media',title:'8 Best Crypto Casinos: The Best Bitcoin Gambling Sites Reviewed',
+     blurb:'A ranked review of crypto casinos, checked against live cashiers and bonus terms.',url:null},
+    {cat:'gaming',lang:'EN',outlet:'iGaming media',title:'10 Best Offshore Casinos for Players from the US',
+     blurb:'Offshore operators compared for US players, with the compliance caveats spelled out.',url:null},
+    {cat:'gaming',lang:'EN',outlet:'Ignition · BetOnline',title:'Best Betsoft Casinos: Trusted Sites for Premium 3D Slots',
+     blurb:'Where Betsoft 3D slots actually play well: performance, payouts and fair bonus terms.',url:null},
+    {cat:'gaming',lang:'ES',outlet:'iGaming media',title:'Los mejores cripto casinos y sitios de casinos Bitcoin',
+     blurb:'Reseña en español de los mejores casinos cripto, con criterios claros de seguridad y bonos.',url:null},
+    {cat:'gaming',lang:'ES',outlet:'iGaming media',title:'Mejores casinos Bitcoin',
+     blurb:'Guía comparativa de casinos Bitcoin para el jugador hispano.',url:null},
+    {cat:'gaming',lang:'ES',outlet:'Winner',title:'Winner México: reseña del casino',
+     blurb:'Reseña completa de operador para el mercado mexicano: juegos, bonos y métodos de pago.',url:null},
+    {cat:'gaming',lang:'ES',outlet:'Colombia.com',title:'Casinos en línea en Colombia: guía y comparativa',
+     blurb:'Panorama del casino en línea regulado en Colombia para un medio local.',url:null},
+    {cat:'gaming',lang:'ES',outlet:'Iberoeconomía',title:'Los mejores casinos Bitcoin en España',
+     blurb:'Comparativa de casinos cripto para el mercado español, con foco en términos reales.',url:null},
+
+    // ===== FINANCE (ES TIU live, EN Gold IRA client byline) =====
+    {cat:'finance',lang:'ES',outlet:'The Investor U',title:'¿Qué son los dividendos y cómo se calculan?',
+     blurb:'Dividendos para nuevos inversionistas: rendimiento, tipos y señales de alerta. Rankeó rápido en un dominio joven.',url:'https://theinvestoru.com/blog/que-son-los-dividendos/'},
+    {cat:'finance',lang:'ES',outlet:'The Investor U',title:'Inversión en dividendos: 5 pasos para implementarla',
+     blurb:'Un manual práctico. Parte de llevar a The Investor U de ~100 a 11K sesiones mensuales.',url:'https://theinvestoru.com/blog/que-es-inversion-en-dividendos/'},
+    {cat:'finance',lang:'ES',outlet:'The Investor U',title:'¿Cómo invertir en la bolsa de valores? Guía para novatos',
+     blurb:'La puerta de entrada a la bolsa, sin tecnicismos, para el inversionista hispano principiante.',url:'https://theinvestoru.com/blog/como-invertir-en-la-bolsa-de-valores/'},
+    {cat:'finance',lang:'ES',outlet:'The Investor U',title:'6 tipos de acciones que debes conocer al invertir en la bolsa',
+     blurb:'De las defensivas a las blue chips: qué es cada tipo y cuándo considerarlo.',url:'https://theinvestoru.com/blog/tipos-de-acciones-en-la-bolsa/'},
+    {cat:'finance',lang:'ES',outlet:'The Investor U',title:'¿Qué acción comprar? Una breve guía para invertir en la bolsa',
+     blurb:'Perfil de riesgo, análisis fundamental y técnico: cómo decidir qué acción comprar.',url:'https://theinvestoru.com/blog/que-accion-comprar/'},
+    {cat:'finance',lang:'EN',outlet:'Sophisticated Investor',title:'American Bullion Review: Analysis for Long-Term Precious Metals Investors',
+     blurb:'A measured Gold IRA review: process, fees, storage and the real risks, for retirement savers.',url:null},
+    {cat:'finance',lang:'EN',outlet:'Sophisticated Investor',title:'American Hartford Gold Review: A Balanced Assessment',
+     blurb:'How a leading precious-metals IRA provider fits a portfolio shaped by inflation and dollar volatility.',url:null},
+    {cat:'finance',lang:'EN',outlet:'Sophisticated Investor',title:'Augusta Precious Metals Review: A Professional Assessment for Gold IRA Investors',
+     blurb:'A research-backed look at costs, custody and suitability for long-term investors.',url:null},
+
+    // ===== PERIODISMO (client byline) =====
+    {cat:'periodismo',lang:'EN',outlet:'NewsBTC',title:'Crypto market news and explainers',
+     blurb:'Bitcoin and altcoin news written for non-technical readers. Accurate first, readable second.',url:null},
+    {cat:'periodismo',lang:'EN',outlet:'99Bitcoins',title:'Crypto education and how-to guides',
+     blurb:'Evergreen crypto explainers for one of the oldest names in the space.',url:null},
+    {cat:'periodismo',lang:'EN',outlet:'Esports Insider',title:'Features on the business of esports',
+     blurb:'Industry features on the money, deals and structure behind competitive gaming.',url:null},
+    {cat:'periodismo',lang:'ES',outlet:'Feature',title:'Bitcoin en América Latina: transformación financiera y nuevas oportunidades',
+     blurb:'Crónica sobre la adopción cripto en la región y su giro cultural y económico.',url:null},
+    {cat:'periodismo',lang:'ES',outlet:'Computing.es',title:'Reportajes de tecnología e inteligencia artificial',
+     blurb:'Coberturas de tecnología e IA para prensa española especializada.',url:null},
+    {cat:'periodismo',lang:'ES',outlet:'La República · The Objective',title:'Análisis de fintech y economía digital',
+     blurb:'Análisis de fintech, cripto y economía digital para prensa latinoamericana y española.',url:null},
+
+    // ===== COPYWRITING / GAME DESCRIPTIONS (client byline) =====
+    {cat:'copywriting',lang:'EN',outlet:'Bovada',title:'Aurora Angel: slot game description',
+     blurb:'Game description copy for Bovada: theme, mechanics and features, optimized for search.',url:null},
+    {cat:'copywriting',lang:'EN',outlet:'Bovada',title:'Luck & Magic Scratch: game description',
+     blurb:'Scratch-card description with meta title and meta description, written to convert and to rank.',url:null},
+    {cat:'copywriting',lang:'EN',outlet:'iGaming',title:'Book of Dead Review: Best Free Slots Online',
+     blurb:'Single-game review and description: theme, volatility and where to play.',url:null},
+    {cat:'copywriting',lang:'EN',outlet:'iGaming',title:'Buffalo Slots Review: Is Buffalo Slots Legit?',
+     blurb:'A single-game review covering RTP, features and banking, all verified.',url:null},
+    {cat:'copywriting',lang:'EN',outlet:'iGaming',title:'243, 720 and 1024 \u201CWays to Win\u201D: What Do They Mean in Online Slots?',
+     blurb:'A slot-mechanics explainer that makes paylines and ways-to-win formats click for new players.',url:null},
+    {cat:'copywriting',lang:'ES',outlet:'iGaming',title:'243, 720 y 1024 \u201CWays to Win\u201D: ¿qué significan en los tragamonedas?',
+     blurb:'La versión en español del explicativo de mecánicas: tema, rodillos y formas de ganar.',url:null},
+    {cat:'copywriting',lang:'ES',outlet:'Bovada',title:'Descripciones de tragamonedas para casinos latinos',
+     blurb:'Descripciones de juego concisas y optimizadas, localizadas para el jugador latino.',url:null},
+    {cat:'copywriting',lang:'ES',outlet:'iGaming',title:'Reseñas de juegos: temas, mecánicas y volatilidad',
+     blurb:'Reseñas de slots y juegos de mesa con la información que el jugador busca.',url:null}
+  ];
+
+  var catBar=document.getElementById('catBar');
+  var feed=document.getElementById('feed');
+  var feednote=document.getElementById('feednote');
+  var legend=document.getElementById('legend');
+  var ticker=document.getElementById('ticker');
+  var filter='all';
+  var ORDER=Object.keys(CATS);
+
+  function matchLang(clip){ return clip.lang==='EN/ES' || clip.lang===(LANG==='en'?'EN':'ES'); }
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  function pad(n){return (n<10?'0':'')+n;}
+
+  function buildTicker(){
+    var one=T[LANG].ticker.map(function(s){return '<b>'+s+'</b>';}).join('<i>\u25C6</i>');
+    ticker.innerHTML=one+'<i>\u25C6</i>'+one+'<i>\u25C6</i>';
+  }
+  function buildCats(){
+    var html='<button class="cat-btn active" data-filter="all">'+T[LANG].all+'</button>';
+    ORDER.forEach(function(key){var c=CATS[key];
+      html+='<button class="cat-btn" data-filter="'+key+'" style="--c:'+c.color+'"><span class="dot" style="background:'+c.color+'"></span>'+c.label[LANG]+'<span class="csym">'+c.sym+'</span></button>';});
+    catBar.innerHTML=html;
+    Array.prototype.forEach.call(catBar.querySelectorAll('.cat-btn'),function(b){b.addEventListener('click',function(){setFilter(b.dataset.filter);});});
+    syncCats();
+  }
+  function syncCats(){
+    Array.prototype.forEach.call(catBar.querySelectorAll('.cat-btn'),function(b){var on=b.dataset.filter===filter;
+      b.classList.toggle('active',on);
+      b.style.color=(on&&b.dataset.filter!=='all')?CATS[b.dataset.filter].color:'';});
+  }
+  function setFilter(f){ filter=f; syncCats(); render(); }
+
+  function entryHTML(clip,c,n){
+    var live=!!clip.url;
+    var statusTxt=live?('\u25CF '+T[LANG].live):T[LANG].client;
+    var statusCls=live?'entry-status live':'entry-status';
+    var ctaHTML=live?'<div class="entry-cta">'+T[LANG].read+' <span class="arw">\u2197</span></div>':'';
+    var open=live?'<a class="entry live" href="'+clip.url+'" target="_blank" rel="noopener" style="--c:'+c.color+'">':'<div class="entry byline" style="--c:'+c.color+'">';
+    var close=live?'</a>':'</div>';
+    return open+'<span class="entry-no">'+pad(n)+'</span>'+
+      '<div class="entry-main"><div class="entry-kick"><span class="entry-out">'+esc(clip.outlet)+'</span>'+
+      '<span class="entry-lang">'+clip.lang+'</span><span class="'+statusCls+'">'+statusTxt+'</span></div>'+
+      '<h2>'+esc(clip.title)+'</h2><p class="dek">'+esc(clip.blurb)+'</p></div>'+
+      ctaHTML+close;
+  }
+  function render(){
+    var show=filter==='all'?ORDER:[filter];
+    var html='',total=0,secs=0;
+    show.forEach(function(key){
+      var items=CLIPS.filter(function(c){return c.cat===key&&matchLang(c);});
+      if(!items.length) return;
+      total+=items.length; secs++;
+      var c=CATS[key];
+      var rows='';
+      items.forEach(function(clip,i){ rows+=entryHTML(clip,c,i+1); });
+      html+='<section class="sec" style="--c:'+c.color+'"><div class="sec-head"><span class="sec-sym">'+c.sym+'</span>'+
+        '<h3 class="sec-name">'+c.label[LANG]+'</h3><span class="sec-count">'+items.length+' '+(items.length===1?T[LANG].piece:T[LANG].pieces)+'</span></div>'+
+        rows+'<div class="sec-more"><span class="pl">+</span>'+c.more[LANG]+'</div></section>';
+    });
+    feed.innerHTML=html;
+    var t=T[LANG];
+    feednote.textContent = total+' '+(total===1?t.piece:t.pieces)+' '+(filter==='all'?t.across+' '+secs+' '+t.sections:t.inn+' '+CATS[filter].label[LANG])+' · '+LANG.toUpperCase();
+    legend.innerHTML='<span class="lv">\u25CF '+t.legendLive+'</span><span>'+t.legendByline+'</span>';
+  }
+  function applyLang(lang){
+    LANG=lang; document.documentElement.lang=lang;
+    document.getElementById('kicker').textContent=T[lang].kicker;
+    document.getElementById('lead').innerHTML=T[lang].lead;
+    document.getElementById('langHint').textContent=T[lang].hint;
+    document.getElementById('meta').innerHTML=T[lang].meta.map(function(m){return '<div><span>'+m+'</span></div>';}).join('');
+    document.getElementById('footBlurb').textContent=T[lang].foot;
+    Array.prototype.forEach.call(document.querySelectorAll('.langbtn'),function(b){b.classList.toggle('active',b.dataset.lang===lang);});
+    buildTicker(); buildCats(); render();
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('.langbtn'),function(b){b.addEventListener('click',function(){applyLang(b.dataset.lang);});});
+  applyLang('en');
+</script>
+</body>
+</html>
